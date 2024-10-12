@@ -3,6 +3,7 @@ import axios from 'axios'
 
 const GetMethod = () => {
     const [post, setPost] = useState([])
+    const [load, setLoad] = useState(false)
     const fetchPost = () => {
         axios.get('https://jsonplaceholder.typicode.com/posts')
             .then(function (response) {
@@ -16,7 +17,7 @@ const GetMethod = () => {
     }
     useEffect(() => {
         fetchPost()
-    }, [])
+    }, [load])
 
     console.log("All Post ", post)
     return (
@@ -24,6 +25,7 @@ const GetMethod = () => {
             <div className="page_width">
                 <br />
                 <h2>Get Posts</h2>
+                <button onClick={() => setLoad(!load)} >Load More Data</button>
                 <div className="all_post_items">
                     {post?.slice(0, 20)?.map((item, index) => {
                         return (
